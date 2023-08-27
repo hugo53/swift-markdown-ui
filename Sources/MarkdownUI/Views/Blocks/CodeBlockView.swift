@@ -32,7 +32,12 @@ struct CodeBlockView: View {
       .textStyleForegroundColor()
       .overlay(
          Button {
-           UIPasteboard.general.string = content
+            #if os(macOS)
+            NSPasteboard.general.clearContents()
+            NSPasteboard.general.setString(content, forType: .string)
+            #else
+            UIPasteboard.general.string = content
+            #endif
          } label: {
            Image(systemName: "doc.on.doc")
              .font(.caption)
