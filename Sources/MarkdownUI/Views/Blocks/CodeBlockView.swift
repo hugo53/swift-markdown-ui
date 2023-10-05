@@ -6,7 +6,7 @@ struct CodeBlockView: View {
 
   private let fenceInfo: String?
   private let content: String
-  @State private var onHover = false
+//  @State private var onHover = false
 
   init(fenceInfo: String?, content: String) {
     self.fenceInfo = fenceInfo
@@ -21,31 +21,31 @@ struct CodeBlockView: View {
         label: .init(self.label)
       )
     )
-    .onHover { over in
-        onHover = over
-    }
+//    .onHover { over in
+//        onHover = over
+//    }
   }
 
   private var label: some View {
     self.codeSyntaxHighlighter.highlightCode(self.content, language: self.fenceInfo)
       .textStyleFont()
       .textStyleForegroundColor()
-      .overlay(
-         Button {
-            #if os(macOS)
-            NSPasteboard.general.clearContents()
-            NSPasteboard.general.setString(content, forType: .string)
-            #else
-            UIPasteboard.general.string = content
-            #endif
-         } label: {
-           Image(systemName: "doc.on.doc")
-             .font(.caption)
-         }
-         .foregroundColor(Color.accentColor)
-         .offset(x: -14, y: 0)
-         .opacity(onHover == true ? 1 : 0)
-         ,alignment: .topTrailing
-       )
+//      .overlay(
+//         Button {
+//            #if os(macOS)
+//            NSPasteboard.general.clearContents()
+//            NSPasteboard.general.setString(content, forType: .string)
+//            #else
+//            UIPasteboard.general.string = content
+//            #endif
+//         } label: {
+//           Image(systemName: "doc.on.doc")
+//             .font(.caption)
+//         }
+//         .foregroundColor(Color.accentColor)
+//         .offset(x: -14, y: 0)
+//         .opacity(onHover == true ? 1 : 0)
+//         ,alignment: .topTrailing
+//       )
   }
 }
